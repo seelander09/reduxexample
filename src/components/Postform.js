@@ -12,11 +12,32 @@ class PostForm extends Component {
     };
     // I decided to bind "this" in the constructor. need to do it so in the form below you know what to do with "this".
     this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   // this targets name when a change occurs. now you can actually add data to your form.
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    // make the variable for what you want to submit. In this case Post
+    const post = {
+      title: this.state.title,
+      body: this.state.body
+    };
+
+    fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(post)
+    })
+      .then(res => res.json())
+      .then(data => console.log(data));
   }
 
   render() {
