@@ -34,7 +34,7 @@ class PostForm extends Component {
       headers: {
         "content-type": "application/json"
       },
-      body: JSON.stringify(post)
+      body: JSON.stringify(post) // this is actual data.
     })
       .then(res => res.json())
       .then(data => console.log(data));
@@ -44,7 +44,7 @@ class PostForm extends Component {
     return (
       <div>
         <h1>Add Post</h1>
-        <form>
+        <form onSubmit={this.onSubmit}>
           <div>
             {/* each of the input values are part of our component state.  */}
             <label>Title: </label>
